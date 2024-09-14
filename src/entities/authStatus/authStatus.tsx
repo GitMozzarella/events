@@ -1,5 +1,6 @@
 import React from 'react'
 import { useSession, signIn, signOut } from 'next-auth/react'
+import { FaUserTie } from 'react-icons/fa6'
 
 export const AuthStatus: React.FC = () => {
 	const { data: session, status } = useSession()
@@ -15,6 +16,7 @@ export const AuthStatus: React.FC = () => {
 					<span className='text-white text-lg font-semibold'>
 						{session.user?.name || 'Пользователь'}
 					</span>
+					<FaUserTie className='w-8 h-8' />
 					<button
 						onClick={() => signOut()}
 						className='bg-red-600 text-white py-1 px-4 rounded-md font-medium transition duration-300 ease-in-out hover:bg-red-700 focus:outline-none '
