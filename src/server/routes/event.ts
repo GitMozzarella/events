@@ -1,5 +1,6 @@
 import {
 	CreateEventSchema,
+	EditEventSchema,
 	JoinEventSchema,
 	LeaveEventSchema
 } from '@/shared/api'
@@ -20,6 +21,7 @@ export const eventRouter = router({
 			isJoined: participations.some(({ userId }) => userId === user?.id)
 		}))
 	}),
+
 	findUnique: procedure
 		.input(
 			z.object({
@@ -34,6 +36,7 @@ export const eventRouter = router({
 					title: true,
 					description: true,
 					date: true,
+					authorId: true,
 					participations: {
 						select: {
 							user: {
@@ -46,6 +49,7 @@ export const eventRouter = router({
 				}
 			})
 		}),
+
 	create: procedure
 		.input(CreateEventSchema)
 		.use(isAuth)
@@ -57,6 +61,29 @@ export const eventRouter = router({
 				}
 			})
 		}),
+
+	update: procedure
+		.input(EditEventSchema.extend({ id: z.number() }))
+		.use(isAuth)
+		.mutation(async ({ input, ctx: { user } }) => {
+			const event = await prisma.event.findUnique({
+				where: { id: input.id }
+			})
+
+			if (event?.authorId !== user.id) {
+				throw new Error('Unauthorized')
+			}
+
+			return prisma.event.update({
+				where: { id: input.id },
+				data: {
+					title: input.title,
+					description: input.description,
+					date: input.date
+				}
+			})
+		}),
+
 	join: procedure
 		.input(JoinEventSchema)
 		.use(isAuth)
@@ -68,6 +95,7 @@ export const eventRouter = router({
 				}
 			})
 		}),
+
 	leave: procedure
 		.input(LeaveEventSchema)
 		.use(isAuth)

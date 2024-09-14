@@ -8,6 +8,7 @@ type EventCardProps = {
 	description: string | null
 	date: Date
 	action: ReactNode
+	isAuthenticated: boolean
 }
 
 export const EventCard = ({
@@ -15,7 +16,8 @@ export const EventCard = ({
 	title,
 	description,
 	date,
-	action
+	action,
+	isAuthenticated
 }: EventCardProps) => {
 	return (
 		<div className='flex font-sans rounded-lg shadow-xl overflow-hidden'>
@@ -47,7 +49,7 @@ export const EventCard = ({
 						>
 							Подробнее
 						</Link>
-						{action}
+						{isAuthenticated && action}
 					</div>
 				</div>
 			</div>
