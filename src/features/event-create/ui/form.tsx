@@ -22,7 +22,7 @@ export const CreateEventForm = ({ onSubmit }: CreateEventFormProps) => {
 	}
 
 	return (
-		<div className='h-screen flex items-center justify-center py-8'>
+		<div className='h-100 flex items-center justify-center py-8'>
 			<div className='w-full max-w-3xl'>
 				<form
 					onSubmit={handleSubmit(onSubmit)}
