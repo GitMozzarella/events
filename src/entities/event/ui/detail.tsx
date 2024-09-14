@@ -53,7 +53,7 @@ export const EventDetail = ({
 	}
 
 	return (
-		<div className='min-h-screen py-8'>
+		<div className='h-100 py-8'>
 			<div className='max-w-4xl mx-auto px-4'>
 				<div className='flex justify-between items-center'>
 					<h3 className='text-center font-semibold leading-7 text-gray-900'>

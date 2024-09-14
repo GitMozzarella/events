@@ -9,7 +9,7 @@ function App({ Component, pageProps }: AppProps) {
 		<SessionProvider session={pageProps.session}>
 			<div className='min-h-screen flex flex-col'>
 				<Header />
-				<main className='flex-grow mt-20'>
+				<main className='flex-grow mt-20 pt-5'>
 					<Component {...pageProps} />
 				</main>
 			</div>
