@@ -25,7 +25,9 @@ export const JoinEventButton = ({
 	return (
 		<button
 			className={`h-10 px-6 font-semibold rounded-md text-white ${
-				isJoined ? 'bg-red-700' : 'bg-green-700'
+				isJoined
+					? 'bg-red-700 hover:bg-red-800'
+					: 'bg-green-700 hover:bg-green-800'
 			}`}
 			onClick={handleClick}
 		>

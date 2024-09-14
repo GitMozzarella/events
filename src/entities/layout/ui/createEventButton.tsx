@@ -17,7 +17,7 @@ export const CreateEventButton = () => {
 		<div>
 			<Link
 				href='/events/create'
-				className='inline-block bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-75'
+				className='inline-block bg-green-700 text-white px-4 py-2 rounded-md hover:bg-green-800 focus:outline-none   focus:ring-opacity-75'
 			>
 				Создать событие
 			</Link>
