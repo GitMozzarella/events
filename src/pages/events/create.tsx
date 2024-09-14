@@ -1,19 +1,19 @@
-import { CreateEventForm } from "@/features/create-event";
-import { CreateEventSchema, trpc } from "@/shared/api";
-import { useRouter } from "next/router";
+import { CreateEventForm } from '@/features/event-create'
+import { CreateEventSchema, trpc } from '@/shared/api'
+import { useRouter } from 'next/router'
 
 export default function CreateEvent() {
-  const router = useRouter();
+	const router = useRouter()
 
-  const { mutate } = trpc.event.create.useMutation({
-    onSuccess: (data) => {
-      router.push(`/events/${data.id}`);
-    },
-  });
+	const { mutate } = trpc.event.create.useMutation({
+		onSuccess: data => {
+			router.push(`/events/${data.id}`)
+		}
+	})
 
-  const handleSubmit = (data: CreateEventSchema) => {
-    mutate(data);
-  };
+	const handleSubmit = (data: CreateEventSchema) => {
+		mutate(data)
+	}
 
-  return <CreateEventForm onSubmit={handleSubmit} />;
+	return <CreateEventForm onSubmit={handleSubmit} />
 }

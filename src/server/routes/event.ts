@@ -1,4 +1,8 @@
-import { CreateEventSchema, JoinEventSchema } from '@/shared/api'
+import {
+	CreateEventSchema,
+	JoinEventSchema,
+	LeaveEventSchema
+} from '@/shared/api'
 import { prisma } from '../db'
 import { isAuth, procedure, router } from '../trpc'
 import { z } from 'zod'
@@ -59,6 +63,17 @@ export const eventRouter = router({
 		.mutation(({ input, ctx: { user } }) => {
 			return prisma.participation.create({
 				data: {
+					eventId: input.id,
+					userId: user.id
+				}
+			})
+		}),
+	leave: procedure
+		.input(LeaveEventSchema)
+		.use(isAuth)
+		.mutation(async ({ input, ctx: { user } }) => {
+			return prisma.participation.deleteMany({
+				where: {
 					eventId: input.id,
 					userId: user.id
 				}
