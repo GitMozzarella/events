@@ -6,8 +6,8 @@ import { useAuth } from '@/hooks/useAuth'
 export default function EditEvent() {
 	const router = useRouter()
 	const { id } = router.query
-	const { session, isAuthenticated, isAuthor } = useAuth()
-	console.log(session)
+	const { isAuthenticated, isAuthor } = useAuth()
+
 	const {
 		data: event,
 		isLoading,

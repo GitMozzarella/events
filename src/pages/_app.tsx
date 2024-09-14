@@ -1,25 +1,28 @@
-import type { AppProps, AppContext } from "next/app";
-import { trpc } from "@/shared/api";
-import { SessionProvider, getSession } from "next-auth/react";
-
-import "@/app/global.css";
+import type { AppProps, AppContext } from 'next/app'
+import { SessionProvider, getSession } from 'next-auth/react'
+import { Header } from '@/entities/layout/ui/header'
+import { trpc } from '@/shared/api'
+import '@/app/global.css'
 
 function App({ Component, pageProps }: AppProps) {
-  return (
-    <div className="mx-auto max-w-4xl">
-      <SessionProvider session={pageProps.session}>
-        <Component {...pageProps} />
-      </SessionProvider>
-    </div>
-  );
+	return (
+		<SessionProvider session={pageProps.session}>
+			<div className='min-h-screen flex flex-col'>
+				<Header />
+				<main className='flex-grow mt-20'>
+					<Component {...pageProps} />
+				</main>
+			</div>
+		</SessionProvider>
+	)
 }
 
 App.getInitialProps = async (ctx: AppContext) => {
-  return {
-    pageProps: {
-      session: await getSession(ctx.ctx),
-    },
-  };
-};
+	return {
+		pageProps: {
+			session: await getSession(ctx.ctx)
+		}
+	}
+}
 
-export default trpc.withTRPC(App);
+export default trpc.withTRPC(App)

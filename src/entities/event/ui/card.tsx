@@ -23,7 +23,7 @@ export const EventCard = ({
 		<div className='flex font-sans rounded-lg shadow-xl overflow-hidden'>
 			<div className='flex-none w-48 relative'>
 				<Image
-					src='/poster.png'
+					src='/concert.jpg'
 					alt=''
 					className='absolute inset-0 w-full h-full object-cover'
 					fill
