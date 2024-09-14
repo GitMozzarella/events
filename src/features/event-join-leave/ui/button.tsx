@@ -2,7 +2,7 @@ import { trpc } from '@/shared/api'
 
 type JoinEventButtonProps = {
 	eventId: number
-	isJoined: boolean // Флаг, чтобы определить, присоединился ли пользователь
+	isJoined: boolean
 	onSuccess?: () => void
 }
 
