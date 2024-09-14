@@ -2,6 +2,7 @@ import { useRouter } from 'next/router'
 import { useAuth } from '@/hooks/useAuth'
 import { RouterOutput } from '@/shared/api'
 import { trpc } from '@/shared/api'
+import { DeleteEventButton } from '@/features/event-delete/'
 
 type EventDetailProps = NonNullable<RouterOutput['event']['findUnique']>
 
@@ -60,12 +61,15 @@ export const EventDetail = ({
 						Информация о событии
 					</h3>
 					{isAuthor(authorId) && (
-						<button
-							onClick={handleEdit}
-							className='rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
-						>
-							Редактировать
-						</button>
+						<div className='flex space-x-4'>
+							<button
+								onClick={handleEdit}
+								className='rounded-md bg-indigo-600 px-4 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600'
+							>
+								Редактировать
+							</button>
+							<DeleteEventButton eventId={Number(router.query.id)} />
+						</div>
 					)}
 				</div>
 				<div className='mt-6 border-t border-gray-100 shadow-lg px-10'>

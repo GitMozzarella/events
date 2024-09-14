@@ -22,3 +22,7 @@ export const JoinEventSchema = z.object({
 export const LeaveEventSchema = z.object({
 	id: z.number().int().positive()
 })
+
+export const DeleteEventSchema = z.object({
+	id: z.number()
+})

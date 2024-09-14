@@ -1,5 +1,6 @@
 import {
 	CreateEventSchema,
+	DeleteEventSchema,
 	EditEventSchema,
 	JoinEventSchema,
 	LeaveEventSchema
@@ -60,6 +61,28 @@ export const eventRouter = router({
 					...input
 				}
 			})
+		}),
+	delete: procedure
+		.input(DeleteEventSchema)
+		.use(isAuth)
+		.mutation(async ({ input, ctx: { user } }) => {
+			const event = await prisma.event.findUnique({
+				where: { id: input.id }
+			})
+
+			if (!event) {
+				throw new Error('Event not found')
+			}
+			if (event.authorId !== user.id) {
+				throw new Error('Unauthorized')
+			}
+			await prisma.participation.deleteMany({
+				where: { eventId: input.id }
+			})
+			await prisma.event.delete({
+				where: { id: input.id }
+			})
+			return { success: true }
 		}),
 
 	update: procedure
